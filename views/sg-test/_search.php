@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+
     <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'Name') ?>
@@ -24,6 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'date') ?>
 
     <?= $form->field($model, 'mod_date') ?>
+
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
@@ -33,3 +35,4 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
