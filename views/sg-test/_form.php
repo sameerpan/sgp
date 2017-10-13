@@ -27,7 +27,7 @@ use kartik\datecontrol\DateControl;
 
             'mod_date' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => DateControl::classname(),'options' => ['type' => DateControl::FORMAT_DATETIME]],
 
-        ]
+       ]
 
     ]);
 
@@ -37,3 +37,4 @@ use kartik\datecontrol\DateControl;
     ActiveForm::end(); ?>
 
 </div>
+
