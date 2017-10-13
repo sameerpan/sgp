@@ -77,7 +77,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /** @var Profile|null */
     private $_profile;
-
+	
     /** @var string Default username regexp */
     public static $usernameRegexp = '/^[-a-zA-Z0-9_\.@]+$/';
 
@@ -120,10 +120,13 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getIsAdmin()
     {
+		
+		//return true;
+		
         return
-            (\Yii::$app->getAuthManager() && $this->module->adminPermission ?
-                \Yii::$app->user->can($this->module->adminPermission) : false)
-            || in_array($this->username, $this->module->admins);
+           (\Yii::$app->getAuthManager() && $this->module->adminPermission ?
+               \Yii::$app->user->can($this->module->adminPermission) : false)
+           || in_array($this->username, $this->module->admins);
     }
 
     /**
