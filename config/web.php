@@ -7,6 +7,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+     //Sameer- Added default timezone
+    'timeZone' => 'Asia/Kolkata',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -73,7 +75,8 @@ $config = [
 			'displaySettings' => [
 				'date' => 'd-m-Y',
 				'time' => 'H:i:s A',
-				'datetime' => 'd-m-Y H:i:s A',
+                                 //Sameer Added php: to below setting   
+				'datetime' => 'php:d-m-Y H:i:s A',
 			],
 
 			// format settings for saving each date attribute
