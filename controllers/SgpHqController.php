@@ -36,7 +36,8 @@ class SgpHqController extends Controller
         $searchModel = new SgpHqSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        return $this->render('index', [
+       return $this->render('index', [
+
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
         ]);
@@ -50,6 +51,7 @@ class SgpHqController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
         // Sameer -Get Region data for dropdown list
         $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
        // Sameer -Get State data for dropdown list
@@ -66,8 +68,7 @@ class SgpHqController extends Controller
                 'region_name' => $region_name,
                 'state_names' => $state_names,
                 ]);
-            
-        }
+         }
     }
 
     /**
@@ -78,6 +79,7 @@ class SgpHqController extends Controller
     public function actionCreate()
     {
         $model = new SgpHq;
+
         
        // Sameer -Get Region data for dropdown list
         $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
@@ -85,15 +87,18 @@ class SgpHqController extends Controller
         $state_names = ArrayHelper::map(\app\models\SgpState::getAllNotDeleted(), 'id', 'state_name');
      //   $patch = new \app\models\SgpPatch(); 
         
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+
                // Sameer -Added items  
                 'region_name' => $region_name,
                 'state_names' => $state_names,
               //  'patch' => $patch, 
+
             ]);
         }
     }
@@ -107,6 +112,7 @@ class SgpHqController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
        // Sameer -Get Region data for dropdown list
         $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
        // Sameer -Get State data for dropdown list
@@ -122,6 +128,7 @@ class SgpHqController extends Controller
                 'model' => $model,
                 'region_name' => $region_name,
                 'state_names' => $state_names,
+
             ]);
         }
     }
@@ -134,11 +141,13 @@ class SgpHqController extends Controller
      */
     public function actionDelete($id)
     {
+
          //Sameer- removing delete and setting is_deleted =1
         //$this->findModel($id)->delete();
         $hq=$this->findModel($id);
         $hq->is_deleted=1;
         $hq->save();
+
         return $this->redirect(['index']);
     }
 

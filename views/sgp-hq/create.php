@@ -8,9 +8,11 @@ use yii\helpers\Html;
  */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
+
     'modelClass' => 'Hq',
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Hqs'), 'url' => ['index']];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-hq-create">
@@ -19,10 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?= $this->render('_form', [
         'model' => $model,
+
        // Sameer -Added items   
         'region_name' => $region_name,
         'state_names' => $state_names,
       //  'patch' => $patch,    
+
     ]) ?>
 
 </div>

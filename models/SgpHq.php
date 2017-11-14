@@ -5,7 +5,9 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "sgp_hq".
+
+ * This is the model class for table "{{%sgp_hq}}".
+
  *
  * @property integer $id
  * @property integer $region_id
@@ -17,6 +19,7 @@ use Yii;
  * @property string $upd_dt
  * @property integer $upd_by
 
+ *
  * @property SgpChemistDetails[] $sgpChemistDetails
  * @property SgpRegion $region
  * @property SgpState $state
@@ -30,7 +33,9 @@ class SgpHq extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'sgp_hq';
+
+        return '{{%sgp_hq}}';
+
     }
 
     /**
@@ -39,13 +44,15 @@ class SgpHq extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+
             //Sameer -removed  'is_deleted', 'upd_dt', 'upd_by','crt_dt', 'crt_by' as these are not mandetory while update
-            [['region_id', 'state_id', 'hq_name'], 'required'],
+            [['region_id', 'state_id', 'hq_name', 'is_deleted', 'crt_dt', 'crt_by', 'upd_dt', 'upd_by'], 'required'],
             [['region_id', 'state_id', 'is_deleted', 'crt_by', 'upd_by'], 'integer'],
             [['crt_dt', 'upd_dt'], 'safe'],
             [['hq_name'], 'string', 'max' => 50],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => SgpRegion::className(), 'targetAttribute' => ['region_id' => 'id']],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => SgpState::className(), 'targetAttribute' => ['state_id' => 'id']],
+
             //Sameer -these are added to add default create date,created by,update date and updated by  upon insert or update
             //crt_dt, crt_by is added when the record is inserted for the first time only
             //upd_dt,upd_by is added in both insert as well as update scenarios
@@ -68,8 +75,9 @@ class SgpHq extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'HQ ID'),
-            'region_id' => Yii::t('app', 'Region Name'),
-            'state_id' => Yii::t('app', 'State Name'),
+
+            'region_id' => Yii::t('app', 'Region ID'),
+            'state_id' => Yii::t('app', 'State ID'),
             'hq_name' => Yii::t('app', 'HQ Name'),
             'is_deleted' => Yii::t('app', 'Is Deleted'),
             'crt_dt' => Yii::t('app', 'Crt Dt'),
@@ -127,6 +135,7 @@ class SgpHq extends \yii\db\ActiveRecord
     {
         return new SgpHqQuery(get_called_class());
     }
+
     // Sameer -Get HQ data for dropdown list
     public static function getAllNotDeleted()
     {
@@ -134,4 +143,5 @@ class SgpHq extends \yii\db\ActiveRecord
       return $hqq->allnotdeleted();
       
     }     
+
 }

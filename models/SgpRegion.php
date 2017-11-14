@@ -5,7 +5,9 @@ namespace app\models;
 use Yii;
 
 /**
+
  * This is the model class for table "sgp_region".
+
  *
  * @property integer $id
  * @property string $region_name
@@ -24,7 +26,9 @@ class SgpRegion extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
+
         return 'sgp_region';
+
     }
 
     /**
@@ -33,7 +37,9 @@ class SgpRegion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+
             //Sameer -removed  'is_deleted', 'upd_dt', 'upd_by','crt_dt', 'crt_by' as these are not mandetory while update
+
             [['region_name'], 'required'],
             [['is_deleted', 'crt_by', 'upd_by'], 'integer'],
             [['crt_dt', 'upd_dt'], 'safe'],
@@ -53,6 +59,7 @@ class SgpRegion extends \yii\db\ActiveRecord
         ];
     }
     
+
     /**
      * @inheritdoc
      */
@@ -91,10 +98,12 @@ class SgpRegion extends \yii\db\ActiveRecord
       $regionq=new \app\models\SgpRegionQuery(new \app\models\SgpRegion);
       return $regionq->allnotdeleted();
       
+
     } 
     
-        public function getdisplayName()
+   public function getdisplayName()
     {
         return $this->region_name;
     }
+
 }

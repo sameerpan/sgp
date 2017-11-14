@@ -10,7 +10,9 @@ use yii\widgets\Pjax;
  * @var app\models\SgpRegionSearch $searchModel
  */
 
+
 $this->title = Yii::t('app', 'Regions');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-region-index">
@@ -31,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
         //Sameer - removed Columns that are not required to be displayed
+
           //  'id',
             'region_name',
          //   'is_deleted',
@@ -40,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
          //   'upd_by', 
          //Sameer- Changed updated by to have username instead of id
         ['attribute' => 'upd_by', 'value' =>function ($model) { return \dektrium\user\models\User::findOne($model->upd_by)->username; }],   
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [

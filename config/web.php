@@ -8,6 +8,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
      //Sameer- Added default timezone
+
     'timeZone' => 'Asia/Kolkata',
     'components' => [
         'request' => [
@@ -46,10 +47,11 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
 			'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-            '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                        '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                        '<controller:\w+>/<id:\d+>' => '<controller>/view',
             ],
         ],
         

@@ -25,7 +25,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'hq_name') ?>
 
+
     <?php // echo $form->field($model, 'is_deleted') ?>
+
 
     <?php // echo $form->field($model, 'crt_dt') ?>
 

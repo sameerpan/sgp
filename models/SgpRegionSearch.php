@@ -28,18 +28,20 @@ class SgpRegionSearch extends SgpRegion
 
     public function search($params)
     {
+
         //Sameer - Changed to search only records with is_deleted=0
        // $query = SgpRegion::find();
+
         $query = SgpRegion::find()->where(["=", "is_deleted",0]);
         
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+     
+        
+        
 
-        
-        
-        
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
@@ -48,7 +50,9 @@ class SgpRegionSearch extends SgpRegion
             'id' => $this->id,
             //Sameer - Always search for non deleted records
            // 'is_deleted' => $this->is_deleted,
+
             'sgp_region.is_deleted' => 0,
+
             'crt_dt' => $this->crt_dt,
             'crt_by' => $this->crt_by,
             'upd_dt' => $this->upd_dt,

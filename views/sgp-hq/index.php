@@ -10,7 +10,9 @@ use yii\widgets\Pjax;
  * @var app\models\SgpHqSearch $searchModel
  */
 
+
 $this->title = Yii::t('app', 'Hqs');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-hq-index">
@@ -30,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
             //Sameer - removed Columns that are not required to be displayed
 //            'id',
 //            'region_id',
@@ -56,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      //Sameer - Added view to retun false as it is not needed in this case as this has only Region Name. 
                     //If there are more column than available in the list then we should remove view line below.
                     'view'=>  function () { return false;},
+
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                             Yii::$app->urlManager->createUrl(['sgp-hq/view', 'id' => $model->id, 'edit' => 't']),
