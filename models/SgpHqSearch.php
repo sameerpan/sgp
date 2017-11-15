@@ -15,8 +15,10 @@ class SgpHqSearch extends SgpHq
     public function rules()
     {
         return [
-            [['id', 'region_id', 'state_id', 'is_deleted', 'crt_by', 'upd_by'], 'integer'],
-            [['hq_name', 'crt_dt', 'upd_dt'], 'safe'],
+             //Sameer - Changed region_id and state_id  on safe field search field name
+            [['id', 'is_deleted', 'crt_by', 'upd_by'], 'integer'],
+            [['hq_name', 'region_id', 'state_id', 'crt_dt', 'upd_dt'], 'safe'],
+
         ];
     }
 
@@ -28,7 +30,11 @@ class SgpHqSearch extends SgpHq
 
     public function search($params)
     {
-        $query = SgpHq::find();
+
+      //Sameer - Changed to search only records with is_deleted=0
+      //$query = SgpHq::find();
+         $query = SgpHq::find()->where(["=", "sgp_hq.is_deleted",0]);
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -38,18 +44,33 @@ class SgpHqSearch extends SgpHq
             return $dataProvider;
         }
 
+        
+        $query->joinWith('region');
+        $query->joinWith('state');     
+        
         $query->andFilterWhere([
             'id' => $this->id,
-            'region_id' => $this->region_id,
-            'state_id' => $this->state_id,
-            'is_deleted' => $this->is_deleted,
+           
+            //Sameer - comment region_id and state_id           
+           // 'region_id' => $this->region_id,
+           // 'state_id' => $this->state_id,
+           
+            //Sameer - Always search for non deleted records
+           // 'is_deleted' => $this->is_deleted,
+            'sgp_hq.is_deleted' => 0,
+
             'crt_dt' => $this->crt_dt,
             'crt_by' => $this->crt_by,
             'upd_dt' => $this->upd_dt,
             'upd_by' => $this->upd_by,
         ]);
 
-        $query->andFilterWhere(['like', 'hq_name', $this->hq_name]);
+        
+        $query->andFilterWhere(['like', 'hq_name', $this->hq_name])
+                //Sameer - Search related table record region name  and state name
+               ->andFilterWhere(['like', 'sgp_region.region_name', $this->region_id])
+               ->andFilterWhere(['like', 'sgp_state.state_name', $this->state_id]);
+        
 
         return $dataProvider;
     }

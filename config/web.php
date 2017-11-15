@@ -7,7 +7,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    //Sameer- Added default timezone
+     //Sameer- Added default timezone
+
     'timeZone' => 'Asia/Kolkata',
     'components' => [
         'request' => [

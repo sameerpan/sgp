@@ -10,7 +10,9 @@ use yii\widgets\Pjax;
  * @var app\models\SgpHqSearch $searchModel
  */
 
-$this->title = Yii::t('app', 'Sgp Hqs');
+
+$this->title = Yii::t('app', 'Hqs');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-hq-index">
@@ -31,19 +33,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'region_id',
-            'state_id',
+            //Sameer - removed Columns that are not required to be displayed
+//            'id',
+//            'region_id',
+         [
+            'attribute' => 'region_id',
+            'value' => 'region.region_name',
+        ],
+ //           'state_id',
+         [
+            'attribute' => 'state_id',
+            'value' => 'state.state_name',
+        ],            
             'hq_name',
-            'is_deleted',
+//            'is_deleted',
 //            ['attribute' => 'crt_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
 //            'crt_by', 
-//            ['attribute' => 'upd_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
-//            'upd_by', 
-
+            ['attribute' => 'upd_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
+         //   'upd_by', 
+         //Sameer- Changed updated by to have username instead of id
+        ['attribute' => 'upd_by', 'value' =>function ($model) { return \dektrium\user\models\User::findOne($model->upd_by)->username; }],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
+                     //Sameer - Added view to retun false as it is not needed in this case as this has only Region Name. 
+                    //If there are more column than available in the list then we should remove view line below.
+                    'view'=>  function () { return false;},
+
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
                             Yii::$app->urlManager->createUrl(['sgp-hq/view', 'id' => $model->id, 'edit' => 't']),

@@ -26,6 +26,13 @@ class SiteController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                        
+                    ],
+                    [
+                        'actions' => ['mr'],
+                        'allow' => true,
+                        'roles' => ['mr'],
+                        
                     ],
                 ],
             ],
@@ -75,6 +82,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -122,5 +130,28 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    
+  
+        public function actionMr()
+    {
+        return $this->render('mr');
+    }
+           public function actionAsm()
+    {
+        return $this->render('asm');
+    }
+           public function actionRsm()
+    {
+        return $this->render('rsm');
+    }
+           public function actionSm()
+    {
+        return $this->render('sm');
+    }
+           public function actionDirector()
+    {
+        return $this->render('director');
     }
 }

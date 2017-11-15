@@ -23,6 +23,13 @@ class SgpHqQuery extends \yii\db\ActiveQuery
         return parent::all($db);
     }
 
+    // Sameer -Get Region data for dropdown list
+    public function allnotdeleted()
+    {
+        return SgpHq::find()->where(["=", "is_deleted",0])->all();
+        
+    }
+
     /**
      * @inheritdoc
      * @return SgpHq|array|null

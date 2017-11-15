@@ -8,9 +8,11 @@ use yii\helpers\Html;
  */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Sgp Region',
+
+    'modelClass' => 'Region',
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sgp Regions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Regions'), 'url' => ['index']];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-region-create">

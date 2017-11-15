@@ -9,9 +9,10 @@ namespace app\models;
  */
 class SgpRegionQuery extends \yii\db\ActiveQuery
 {
-   /* public function active()
+
+    /*public function active()
     {
-        return $this->andWhere('[[is_deleted]]=0');
+        return $this->andWhere('[[status]]=1');
     }*/
 
     /**
@@ -20,15 +21,17 @@ class SgpRegionQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
-       return parent::all($db);
-       //return parent::andWhere(array('is_deleted'=>0));
+
+        return parent::all($db);
     }
-    // Sameer -Get Region data for dropdown list
+   // Sameer -Get Region data for dropdown list
+
     public function allnotdeleted()
     {
         return SgpRegion::find()->where(["=", "is_deleted",0])->all();
         
     }
+
 
     /**
      * @inheritdoc

@@ -9,9 +9,13 @@ use kartik\datecontrol\DateControl;
  * @var app\models\SgpHq $model
  */
 
+
+//Sameer - changed the title to show name
+
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sgp Hqs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="sgp-hq-view">
     <div class="page-header">
@@ -29,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => DetailView::TYPE_INFO,
         ],
         'attributes' => [
+
             'id',
             'region_id',
             'state_id',
@@ -62,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'upd_by',
+
         ],
         'deleteOptions' => [
             'url' => ['delete', 'id' => $model->id],

@@ -51,7 +51,9 @@ class SgpRegionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             //Sameer - Changed to redirect to index if successfully saved
+
             //return $this->redirect(['view', 'id' => $model->id]);
              return $this->redirect('index');
         } else {
@@ -75,6 +77,7 @@ class SgpRegionController extends Controller
                 'model' => $model,
             ]);
         }
+
     }
 
     /**
@@ -110,9 +113,11 @@ class SgpRegionController extends Controller
     {
         //Sameer- removing delete and setting is_deleted =1
         //$this->findModel($id)->delete();
+
         $region=$this->findModel($id);
         $region->is_deleted=1;
         $region->save();
+
         return $this->redirect(['index']);
     }
 

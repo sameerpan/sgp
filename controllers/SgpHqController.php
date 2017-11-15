@@ -35,8 +35,9 @@ class SgpHqController extends Controller
     {
         $searchModel = new SgpHqSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
-      
-           return $this->render('index', [
+
+       return $this->render('index', [
+
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
         ]);
@@ -50,12 +51,24 @@ class SgpHqController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        
+
+        // Sameer -Get Region data for dropdown list
+        $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
+       // Sameer -Get State data for dropdown list
+        $state_names = ArrayHelper::map(\app\models\SgpState::getAllNotDeleted(), 'id', 'state_name');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+          //Sameer - Changed to redirect to index if successfully saved
+            //return $this->redirect(['view', 'id' => $model->id]);
+             return $this->redirect('index');
         } else {
-            return $this->render('view', ['model' => $model]);
-        }
+            return $this->render('view', [
+                'model' => $model,               
+                 // Sameer -Added items  
+                'region_name' => $region_name,
+                'state_names' => $state_names,
+                ]);
+         }
     }
 
     /**
@@ -66,15 +79,26 @@ class SgpHqController extends Controller
     public function actionCreate()
     {
         $model = new SgpHq;
-        // Sameer -Get Region data for dropdown list
-        $items = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
+
+        
+       // Sameer -Get Region data for dropdown list
+        $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
+       // Sameer -Get State data for dropdown list
+        $state_names = ArrayHelper::map(\app\models\SgpState::getAllNotDeleted(), 'id', 'state_name');
+     //   $patch = new \app\models\SgpPatch(); 
+        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                  // Sameer -Added items  
-                'items' => $items
+
+               // Sameer -Added items  
+                'region_name' => $region_name,
+                'state_names' => $state_names,
+              //  'patch' => $patch, 
+
             ]);
         }
     }
@@ -89,11 +113,22 @@ class SgpHqController extends Controller
     {
         $model = $this->findModel($id);
 
+       // Sameer -Get Region data for dropdown list
+        $region_name = ArrayHelper::map(\app\models\SgpRegion::getAllNotDeleted(), 'id', 'region_name');
+       // Sameer -Get State data for dropdown list
+        $state_names = ArrayHelper::map(\app\models\SgpState::getAllNotDeleted(), 'id', 'state_name');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+             //Sameer - Changed to redirect to index if successfully saved
+           // return $this->redirect(['view', 'id' => $model->id]);
+            return $this->render('index', [
+                'model' => $model,
+            ]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'region_name' => $region_name,
+                'state_names' => $state_names,
+
             ]);
         }
     }
@@ -106,7 +141,12 @@ class SgpHqController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+
+         //Sameer- removing delete and setting is_deleted =1
+        //$this->findModel($id)->delete();
+        $hq=$this->findModel($id);
+        $hq->is_deleted=1;
+        $hq->save();
 
         return $this->redirect(['index']);
     }

@@ -10,7 +10,9 @@ use yii\widgets\Pjax;
  * @var app\models\SgpRegionSearch $searchModel
  */
 
-$this->title = Yii::t('app', 'Sgp Regions');
+
+$this->title = Yii::t('app', 'Regions');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sgp-region-index">
@@ -31,15 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
         //Sameer - removed Columns that are not required to be displayed
-           // 'id',
+
+          //  'id',
             'region_name',
-            //'is_deleted',
-          //  ['attribute' => 'crt_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y ']],
-           // 'crt_by',
-           ['attribute' => 'upd_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
-           //'upd_by', 
-            //Sameer- Changed updated by to have username instead of id
-            ['attribute' => 'upd_by', 'value' =>function ($model) { return \dektrium\user\models\User::findOne($model->upd_by)->username; }],
+         //   'is_deleted',
+         //    ['attribute' => 'crt_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']],
+         //    'crt_by',
+            ['attribute' => 'upd_dt','format' => ['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
+         //   'upd_by', 
+         //Sameer- Changed updated by to have username instead of id
+        ['attribute' => 'upd_by', 'value' =>function ($model) { return \dektrium\user\models\User::findOne($model->upd_by)->username; }],   
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [

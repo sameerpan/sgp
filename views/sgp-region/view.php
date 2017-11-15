@@ -10,9 +10,11 @@ use kartik\datecontrol\DateControl;
  */
 //Sameer - changed the title to show name
 //$this->title = $model->id;
+
 $this->title = $model->region_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sgp Regions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="sgp-region-view">
     <div class="page-header">
@@ -22,18 +24,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+
         'condensed' => true,
         'hover' => true,
+
         'mode' => Yii::$app->request->get('edit') == 't' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
         'panel' => [
             'heading' => $this->title,
             'type' => DetailView::TYPE_INFO,
         ],
-        //Sameer - removed attributes that are not required to be displayed
+
+          //Sameer - removed attributes that are not required to be displayed      
         'attributes' => [
-        //    'id',
+//            'id',
             'region_name',
-       /*     'is_deleted',
+        /*    'is_deleted',
+
             [
                 'attribute' => 'crt_dt',
                 'format' => [
@@ -47,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type' => DateControl::FORMAT_DATETIME
                 ]
             ],
+
             //'crt_by',
-           
             //Sameer-Changed updated by to show username instead of id
             ['attribute' => 'upd_by', 'value' => \dektrium\user\models\User::findOne($model->upd_by)->username, 'mode'=>DetailView::MODE_VIEW],
             [
@@ -64,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type' => DateControl::FORMAT_DATETIME
                 ]
             ],*/
-           
+
         ],
         'deleteOptions' => [
             'url' => ['delete', 'id' => $model->id],
